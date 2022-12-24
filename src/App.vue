@@ -1,30 +1,38 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div>
+    <p class="p" v-on:click="getpost()">qwertyuiop[]</p>
+    <p>{{ info }}</p>
+  </div>
 </template>
 
+
+<script>
+import axios from 'axios'
+  export default{
+    data() {
+      return {
+        info: null
+      }
+    },
+    methods: {
+      getpost(){
+        axios
+      .get('/test')
+      .then(response => (this.info = response));
+      }
+    },
+  }
+</script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+div{
+  margin-top: 100px;
   text-align: center;
-  color: #2c3e50;
 }
-
-nav {
-  padding: 30px;
+.p{
+  font-size: large;
+  cursor: pointer;
 }
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.p:hover{
+  color: rgb(61, 61, 61);
 }
 </style>
