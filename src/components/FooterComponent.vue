@@ -36,6 +36,14 @@
                 <h2>Subscription</h2>
                 <input type="email" placeholder="Enter email id here" class="col-8 col-md-5 col-lg-6">
                 <input type="submit" value="Get Notify"  class="col-4 col-md-4 col-lg-3">
+                <div class="social col-10">
+                    <a href="#"><img width="27px" src="@/assets/social/fb.png"></a>
+                    <a href="#"><img width="30px" src="@/assets/social/in.png"></a>
+                    <a href="#"><img width="30px" src="@/assets/social/inst.png"></a>
+                    <a href="#"><img width="30px" src="@/assets/social/pin.png"></a>
+                    <a href="#"><img width="30px" src="@/assets/social/tw.png"></a>
+                    <a href="#"><img width="30px" src="@/assets/social/yt.png"></a>
+                </div>
             </div>
         </div>
     </div>
@@ -96,5 +104,19 @@
     background-color: #bfa145;;
     border: none;
     padding: 3px;
+}
+.social{
+    margin-top: 1em;
+}
+.social a{
+    display: inline;
+    filter: invert(100%);
+    -webkit-filter:invert(100%);
+    opacity: 0.6;
+    margin: 0 0.2em;
+    transition: opacity linear 0.2s;
+}
+.social a:hover{
+    opacity: 1;
 }
 </style>
