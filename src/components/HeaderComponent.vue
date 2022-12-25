@@ -11,7 +11,7 @@
                     <rect x="10" y="16" width="15" height="2" fill="white"/>
                 </svg>
             </button>
-            <div class="offset-1 offset-lg-3 offset-xl-4 col-sm-11 col-md-6 col-lg-5 col-xl-4 nav">
+            <div class="offset-1  offset-lg-2 offset-xl-4 col-sm-11 col-md-6 col-lg-5 col-xl-4 nav">
                 <RouterLink to="/">
                     Home
                 </RouterLink>
@@ -45,9 +45,10 @@
 </script>
 
 <style>
-body{
-    padding: 0;
-    margin: 0;
+
+div{
+  font-family: 'Raleway', sans-serif;
+  font-size: 1em
 }
 .header{
 
@@ -127,20 +128,24 @@ body{
     }
     .buttonClick{
         height: 300px;
-} 
+    } 
    
 } 
 @media all and (max-width:450px ){
     .header{
         height: 50px;  
     }
-    
+    .buttonClick{
+        height: 300px;
+    } 
 } 
 @media all and (max-width:350px ){
     .header{
         height: 40px;  
     }
-
+    .buttonClick{
+        height: 300px;
+    } 
     
 } 
 
