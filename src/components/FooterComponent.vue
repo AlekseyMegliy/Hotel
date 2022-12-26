@@ -57,6 +57,7 @@
     background-color: #585650;
 }
 .footer .row{
+    width: 100%;
     text-align: center;
     padding: 0 0 5em 1.25em;
 }

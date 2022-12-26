@@ -103,7 +103,7 @@ div{
 .nav a:hover{
     color:#000000;
 }
-@media all and (max-width:768px ){
+@media all and (max-width:767px ){
     .header{
         padding:10px ;
         height: 60px;
