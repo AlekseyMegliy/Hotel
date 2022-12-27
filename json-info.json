@@ -1,0 +1,7 @@
+{
+    "demonstration":{
+        "1": {"id":1,"imgSrc": [8, 9, 10], "header": "Rooms" },
+        "2": {"id":2,"imgSrc": [4, 6, 3], "header": "Tour Packages" },
+        "3": {"id":3,"imgSrc": [1, 2, 5], "header": "Food and Drinks" }
+    }
+}

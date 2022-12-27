@@ -94,7 +94,7 @@
 
 <style>
 .home-form{
-    margin: 100px 0;
+    margin: 100px 0px 100px 15px;
 }
 .home-form .row{
     width: 100%;
