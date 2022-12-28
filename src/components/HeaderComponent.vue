@@ -15,7 +15,7 @@
                 <RouterLink to="/">
                     Home
                 </RouterLink>
-                <RouterLink to="/">
+                <RouterLink to="/rooms">
                     Rooms & Tariff
                 </RouterLink>
                 <RouterLink to="/">
