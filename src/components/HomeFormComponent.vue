@@ -96,6 +96,11 @@
 .home-form{
     margin: 100px 0px 100px 15px;
 }
+@media all and (max-width:600px ){
+    .home-form{
+    margin: 0px 0px 100px 15px;
+    }
+}
 .home-form .row{
     width: 100%;
     justify-content: center;
