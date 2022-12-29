@@ -1,8 +1,8 @@
 <template>
-    <div class="col-md-5 col-11 room-one">
+    <div v-if="data.id >= min_limit && data.id <= max_limit" class="col-md-5 col-11 room-one">
         <img :src="require(`@/assets/images/photos/${data.imgSrc[0]}.jpg`)">
         <div class="about-room">
-            <h2>{{ data.header }}</h2>
+            <h2>{{ data.id }} {{ data.header }}</h2>
             <p>{{ data.shortDesc }}</p>
             <RouterLink to="/" class="detaisl-link">Check Details</RouterLink>
         </div>
@@ -11,7 +11,7 @@
 
 <script>
     export default{
-        props:['data']
+        props:['data', 'min_limit', 'max_limit']
     }
 </script>
 

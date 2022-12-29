@@ -10,7 +10,13 @@
     import Footer from '@/components/FooterComponent.vue';
     
     export default{
-        components:{Header, RoomsMain, Footer}
+        components:{Header, RoomsMain, Footer},
+        data() {
+            return {
+                
+                
+            }
+        },
         
     }
 </script>
