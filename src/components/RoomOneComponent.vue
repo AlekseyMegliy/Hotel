@@ -4,7 +4,7 @@
         <div class="about-room">
             <h2>{{ data.id }} {{ data.header }}</h2>
             <p>{{ data.shortDesc }}</p>
-            <RouterLink to="/" class="detaisl-link">Check Details</RouterLink>
+            <RouterLink :to="{ path: '/room', query: { room: data.id }}" class="detaisl-link">Check Details</RouterLink>
         </div>
     </div>
 </template>

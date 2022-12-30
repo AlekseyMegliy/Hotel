@@ -58,12 +58,14 @@
     position: relative;
     white-space:nowrap;
     overflow: hidden;
+    padding: 0;
    
 }
 .slider .img{
     position: relative;
     box-sizing: content-box;
-    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
     transition: all ease-in-out 0.8s;
 }
 

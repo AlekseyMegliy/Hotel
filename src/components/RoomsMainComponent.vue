@@ -2,14 +2,14 @@
     <h2 class="offset-sm-1 rooms-header">Rooms & Tariff</h2>
     <div class="conteiner rooms">
         <div class="row ">
-            
+                
             <RoomOne v-for="item of rooms"
                     v-bind:data="item"
                     v-bind:key="item.id" 
                     v-bind:min_limit="min_limit"
                     v-bind:max_limit="max_limit"
                     />
-            <div class="rooms-nav col-md-3 col-6">
+            <div class="rooms-nav col-md-5 col-12">
                 <button v-bind:disabled="min_limit===1" v-bind:class="{'limit-for-arrow': min_limit===1}" v-on:click="min_limit -= 12, max_limit -=12"><a href="#">«</a></button>
                 <button v-bind:class="{current: min_limit===1}" v-on:click="min_limit=1, max_limit=12"><a href="#">1</a></button>
                 <button v-bind:class="{current: min_limit===13}" v-on:click="min_limit=13, max_limit=24"><a href="#">2</a></button>
@@ -27,7 +27,7 @@
 import RoomOne from '@/components/RoomOneComponent.vue'
 import Jsoninfo from '../../json-info.json' 
     export default{
-        
+      
         data() {
             return {
                 rooms: Jsoninfo.rooms,
@@ -36,7 +36,8 @@ import Jsoninfo from '../../json-info.json'
 
             }
         },
-        components:{RoomOne}
+        components:{RoomOne},
+        
     }
 </script>
 
