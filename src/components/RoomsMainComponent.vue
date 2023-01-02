@@ -1,5 +1,5 @@
 <template>
-    <h2 class="offset-sm-1 rooms-header">Rooms & Tariff</h2>
+    <h2 class="offset-md-1 rooms-header">Rooms & Tariff</h2>
     <div class="conteiner rooms">
         <div class="row ">
                 
@@ -45,7 +45,7 @@ import Jsoninfo from '../../json-info.json'
 .rooms-header{
     font-size: 2em;
     color: #73726C;
-    padding: 1em 35px 0em 35px;
+    padding: 1em 25px 0em 25px;
     font-family: 'Old Standard TT', serif;
 }
 .rooms .row{
@@ -94,6 +94,15 @@ import Jsoninfo from '../../json-info.json'
     color: inherit;
     cursor: inherit;
 }
-
+@media all and (max-width:767px ){
+    .rooms-header{
+    padding: 1em 25px 0em 50px;
+    }
+}
+@media all and (max-width:450px ){
+    .rooms-header{
+    padding: 1em 25px 0em 10%;
+    }
+}
 
 </style>

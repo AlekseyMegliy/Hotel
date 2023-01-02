@@ -18,7 +18,7 @@
                 <RouterLink to="/rooms">
                     Rooms & Tariff
                 </RouterLink>
-                <RouterLink to="/">
+                <RouterLink to="/introduction">
                     Introduction
                 </RouterLink>
                 <RouterLink to="/">
@@ -61,10 +61,13 @@ div{
     display: flex;
 }
 .header .logo{
-    text-align: center;
+    /* text-align: center; */
     margin-top: auto;
     margin-bottom: auto;
     padding-bottom: 10px;
+}
+.header .logo img{
+    margin-left: 25px;
 }
 .header-button{
     padding: 0;
