@@ -4,6 +4,7 @@ import RoomsPage from '@/pages/RoomsPage.vue'
 import RoomPage from '@/pages/RoomPage.vue'
 import Introduction from '@/pages/IntroductionPage.vue'
 import Gallery from '@/pages/GalleryPage.vue'
+import Contact from '@/pages/ContactPage.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/gallery',
     name: 'gallery',
     component: Gallery
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: Contact
   }
 ]
 

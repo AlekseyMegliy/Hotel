@@ -24,7 +24,7 @@
                 <RouterLink to="/gallery">
                     Gallery
                 </RouterLink>
-                <RouterLink to="/">
+                <RouterLink to="/contact">
                     Contact
                 </RouterLink>
 
@@ -61,7 +61,6 @@ div{
     display: flex;
 }
 .header .logo{
-    /* text-align: center; */
     margin-top: auto;
     margin-bottom: auto;
     padding-bottom: 10px;

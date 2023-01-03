@@ -131,7 +131,7 @@
     margin-bottom: 15px;
     padding: 5px 10px ;
     font-size: 0.9em;
-  
+    opacity: 0.6;
     font-family: 'Raleway', sans-serif;
 }
 input::-webkit-outer-spin-button,
@@ -170,6 +170,7 @@ input::-webkit-inner-spin-button {
 .home-form .form textarea{
     font-family: 'Raleway', sans-serif;
     padding: 5px 10px;
+    opacity: 0.6;
 }
 .home-form .form input[type=submit]{
     background-color: #bfa145;
@@ -177,6 +178,7 @@ input::-webkit-inner-spin-button {
     color: white;
     border: none;
     padding: 7px;
+    opacity: 1;
 }
 .home-form .form input[type=submit]:hover{
     background-color: #756534;

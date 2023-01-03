@@ -37,15 +37,8 @@
         components:{Photo, PhotoZoomer},
         methods: {
             zoomer(num){
-                // alert(num.zoom)
-                // if(num.zoom == 0){
-                //     num.zoom = 12
-                //     alert("vbnm1")
-                //     this.zoom = num.zoom 
-                // }
                 if(num.zoom == 13){
                     num.zoom = 1
-                    // alert("vbnm2")
                     this.zoom = num.zoom 
                 }else{
                     this.zoom = num.zoom 

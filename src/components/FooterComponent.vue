@@ -28,7 +28,7 @@
                 <RouterLink to="/gallery">
                     Tour Packages
                 </RouterLink>
-                <RouterLink to="/">
+                <RouterLink to="/contact">
                     Contact
                 </RouterLink>
             </div>
