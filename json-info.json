@@ -63,5 +63,21 @@
         "56": {"id":56, "imgSrc": [9, 10, 11], "size": 44, "price": 200.00,"header": "Luxirious Suites", "amenities":[ "The view from the window of the wonderful city especially impressed you after sunset", "Full bar of booze", "Comfortable double bed", "Excellent noise isolation"] ,"shortDesc": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error aliquam et consectetur earum tempora nostrum iure repellat consequatur architecto, rerum ", "Description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error aliquam et consectetur earum tempora nostrum iure repellat consequatur architecto, rerum nisi fuga inventore qui porro debitis? Nemo ratione vitae velit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error aliquam et consectetur earum tempora nostrum iure repellat consequatur architecto, rerum nisi fuga inventore qui porro debitis? Nemo ratione vitae velit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error aliquam et consectetur earum tempora nostrum iure repellat consequatur architecto, rerum nisi fuga inventore qui porro debitis? Nemo ratione vitae velit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error aliquam et consectetur earum tempora nostrum iure repellat consequatur architecto, rerum nisi fuga inventore qui porro debitis? Nemo ratione vitae velit."}
       
        
+    },
+    "photos":{
+        "1": {"id": 1, "imgSrc": 1, "name": "Foods"},
+        "2": {"id": 2, "imgSrc": 2, "name": "Coffe"},
+        "3": {"id": 3, "imgSrc": 3, "name": "Travel"},
+        "4": {"id": 4, "imgSrc": 4, "name": "Adventure"},
+        "5": {"id": 5, "imgSrc": 5, "name": "Fruits"},
+        "6": {"id": 6, "imgSrc": 6, "name": "Summer"},
+        "7": {"id": 7, "imgSrc": 7, "name": "Bathroom"},
+        "8": {"id": 8, "imgSrc": 8, "name": "Rooms"},
+        "9": {"id": 9, "imgSrc": 9, "name": "Big Room"},
+        "10": {"id": 10, "imgSrc": 10, "name": "Living Room"},
+        "11": {"id": 11, "imgSrc": 11, "name": "Small Room"},
+        "12": {"id": 12, "imgSrc": 5, "name": "Foods"}
+
+
     }
 }

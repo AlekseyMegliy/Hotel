@@ -21,7 +21,7 @@
                 <RouterLink to="/introduction">
                     Introduction
                 </RouterLink>
-                <RouterLink to="/">
+                <RouterLink to="/gallery">
                     Gallery
                 </RouterLink>
                 <RouterLink to="/">

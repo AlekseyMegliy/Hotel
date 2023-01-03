@@ -3,6 +3,7 @@ import HomePage from '@/pages/HomePage.vue'
 import RoomsPage from '@/pages/RoomsPage.vue'
 import RoomPage from '@/pages/RoomPage.vue'
 import Introduction from '@/pages/IntroductionPage.vue'
+import Gallery from '@/pages/GalleryPage.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/introduction',
     name: 'introduction',
     component: Introduction
+  },
+  {
+    path: '/gallery',
+    name: 'gallery',
+    component: Gallery
   }
 ]
 
