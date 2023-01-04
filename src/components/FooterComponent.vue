@@ -34,7 +34,7 @@
             </div>
             <div class="col-md-4 footer-info">
                 <h2>Subscription</h2>
-                <input type="email" placeholder="Enter email id here" class="col-8 col-md-5 col-lg-6">
+                <input id="email" type="email" name="email" placeholder="Enter email id here" class="col-8 col-md-5 col-lg-6">
                 <input type="submit" value="Get Notify"  class="col-4 col-md-4 col-lg-3">
                 <div class="social col-10">
                     <a href="#"><img width="27px" src="@/assets/social/fb.png"></a>
@@ -94,7 +94,7 @@
     color: #ffffff;
 }
 .footer-info input[type='email']{
-    color: #DCDCDC;
+    color: #73726C;
     font-size: 0.9em;
     padding: 3px;
     border: none;

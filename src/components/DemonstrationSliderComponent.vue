@@ -3,7 +3,7 @@
         <Slider v-bind:imgSrc="data.imgSrc" />
         <div class="slider-dem-details">
             <p>{{ data.header }}</p> 
-            <RouterLink to="/"><img width="25" height="25" src="@/assets/social/det.png"></RouterLink>
+            <RouterLink to="/gallery"><img width="25" height="25" src="@/assets/social/det.png"></RouterLink>
         </div>
     </div>
 </template>

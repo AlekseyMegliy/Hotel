@@ -19,7 +19,7 @@
                 v-bind:zooms="zoom"
                 />
 
-    <div v-bind:class="{backdrop: zoom}" ></div>
+    <div v-bind:class="{backdrop: zoom}" v-on:click="zoom=0"></div>
 
 </template>
 

@@ -1,7 +1,7 @@
 <template>
     <transition name="photozoom">
         <div class="photozoom" v-if="zooms == data.id">
-           
+            <div class="zoomback" v-on:click="this.$emit('zoom', {zoom:  0})"></div>
             <h2>{{ data.name }}</h2>
             <span class=" col-1 remove-zoom" v-on:click="this.$emit('zoom', {zoom:  0})">
                 <svg>
@@ -37,6 +37,11 @@
         text-align: center;
         top: 0;
 
+    }
+    .zoomback{
+        position: absolute;
+        width: 100%;
+        height: 100%;
     }
     .photozoom .zoom-button{
         border: 1px solid rgb(255, 255, 255);
@@ -138,10 +143,10 @@
     }
     .photozoom .disabled{
         cursor: default;
-        opacity: 0.2;
+        opacity: 0.1;
     }
     .photozoom .disabled:hover{
-        opacity: 0.2;
+        opacity: 0.1;
     }
     .photozoom-enter-active, .photozoom-leave-active {
         opacity: 1;
