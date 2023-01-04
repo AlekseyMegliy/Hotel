@@ -9,7 +9,7 @@
                     <rect x="10" y="6" width="17" height="3"/>
                 </svg>
             </span>
-            <img  :src="require(`@/assets/images/photos/${data.imgSrc}.jpg`)">
+            <img  :src="require(`@/assets/images/photos/${data.imgSrc}.jpg`)" v-touch:swipe.left="rightzoom" v-touch:swipe.right="leftzoom">
             <span v-bind:class="{ disabled: zooms==1 }" class="zoom-button zoom-left-button"  v-on:click="this.$emit('zoom', {zoom:  zooms-1})"><img  src="@/assets/social/drop.png"></span>
             <span class="zoom-button zoom-right-button"  v-on:click="this.$emit('zoom', {zoom:  zooms+1})"><img src="@/assets/social/drop.png"></span>
         </div>
@@ -23,6 +23,13 @@
             return {
                 zoom:0,
                 
+            }
+        }, methods: {
+            rightzoom(){
+                this.$emit('zoom', {zoom:  this.zooms+1})
+            },
+            leftzoom(){
+                this.$emit('zoom', {zoom:  this.zooms-1})
             }
         },
     }
@@ -56,8 +63,9 @@
         cursor: pointer;
     }
     .photozoom .zoom-button img{
-        margin: 15px 0;
+        margin: 30% -2px;
         transition: all ease-in-out 0.3s;
+        width: 80%;
         
     }
     .photozoom  .zoom-left-button{
@@ -130,13 +138,59 @@
         box-sizing: content-box;
         opacity: 1;
         }
+        .photozoom .zoom-button img{
+        margin: -5px 4px;
+        transition: all ease-in-out 0.3s;
+        width: 80%;
+        
+        }
     }
-    @media all and (max-width:450px ) and (max-height: 850px){
+    @media all and (max-width:850px ) and (max-height: 1200px){
         .photozoom img{
         position: absolute;
         left: 2.5%;
         width: 95%;
-        top: 40%;
+        top: 30%;
+        box-sizing: content-box;
+        opacity: 1;
+        }
+        .photozoom .zoom-button{
+        filter: invert(100%);
+        background-color: rgba(255, 255, 255, 0.134);
+        }
+        .photozoom .zoom-button img{
+        margin: 0px 11px;
+        transition: all ease-in-out 0.3s;
+        width: 50%;
+        
+        }
+    }
+    @media all and (max-width:767px ) and (max-height: 450px){
+        .photozoom .zoom-button img{
+        margin: -5px 4px;
+        transition: all ease-in-out 0.3s;
+        width: 80%;
+        
+        }
+    }
+    @media all and (max-width:450px ) and (max-height: 920px){
+        .photozoom img{
+        position: absolute;
+        left: 2.5%;
+        width: 95%;
+        top: 38%;
+        box-sizing: content-box;
+        opacity: 1;
+        }
+      
+    }
+   
+    @media all and (max-width:800px ) and (max-height: 365px){
+        .photozoom img{
+        position: absolute;
+        left: 19%;
+        width: 62%;
+        top: 3.5%;
         box-sizing: content-box;
         opacity: 1;
         }

@@ -85,7 +85,7 @@
                     </select>
                     </div>
                     <textarea class="col-12" rows="3" placeholder="Message"></textarea>
-                    <input type="submit" value="Submit" class="col-2 col-md-4">
+                    <input type="submit" value="Submit" class="col-3 col-md-4">
                 </form>
             </div>
         </div>
