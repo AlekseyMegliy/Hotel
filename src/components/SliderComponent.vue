@@ -89,13 +89,13 @@
 .slider .slider-button-left img{
     z-index: 2;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 10px;
     transform: rotate(-90deg);
 }
 .slider .slider-button-right img{
     position: absolute;
-    top: 50%;
+    top: 45%;
     right: 10px;
     transform: rotate(90deg);
 }
