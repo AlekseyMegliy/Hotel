@@ -25,7 +25,7 @@
     min-width: 100%;
 }
 .introduction .row{
-    width: 100%;
+    max-width: 100%;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -43,15 +43,11 @@
     height: 55vw;
 }
 
-@media all and (max-width:767px ){
+ @media all and (max-width:767px ){
     .introduction-header{
     padding: 1em 25px 0em 13px;
     }
-}
-@media all and (max-width:450px ){
-    .introduction-header{
-    padding: 1em 25px 0em 10%;
-    }
-}
+} 
+
 
 </style>

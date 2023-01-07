@@ -10,14 +10,17 @@
                     v-bind:max_limit="max_limit"
                     />
             <div class="rooms-nav col-md-5 col-12">
-                <button v-bind:disabled="min_limit===1" v-bind:class="{'limit-for-arrow': min_limit===1}" v-on:click="min_limit -= 12, max_limit -=12"><a href="#">«</a></button>
-                <button v-bind:class="{current: min_limit===1}" v-on:click="min_limit=1, max_limit=12"><a href="#">1</a></button>
-                <button v-bind:class="{current: min_limit===13}" v-on:click="min_limit=13, max_limit=24"><a href="#">2</a></button>
-                <button v-bind:class="{current: min_limit===25}" v-on:click="min_limit=25, max_limit=36"><a href="#">3</a></button>
-                <button v-bind:class="{current: min_limit===37}" v-on:click="min_limit=37, max_limit=48"><a href="#">4</a></button>
-                <button v-bind:class="{current: min_limit===49}" v-on:click="min_limit=49, max_limit=60"><a href="#">5</a></button>
-                <button v-bind:disabled="min_limit===49" v-bind:class="{'limit-for-arrow': min_limit===49}" v-on:click="min_limit += 12, max_limit +=12"><a href="#">»</a></button>
-                
+                <button v-bind:disabled="min_limit===1" v-bind:class="{'limit-for-arrow': min_limit===1}" v-on:click="min_limit = 1, max_limit =12"><a href="#">&lt;&lt;</a></button>
+                <button v-bind:disabled="min_limit===1" v-bind:class="{'limit-for-arrow': min_limit===1}" v-on:click="min_limit -= 12, max_limit -=12"><a href="#">&lt;</a></button>
+                <button v-for="item of buttonNum" 
+                        :key="item" 
+                        v-bind:class="{current: min_limit=== 1+item*12-12, inviz: item< min_but(min_limit) ||  item>max_but(min_limit) }" 
+                        v-on:click="min_limit=1+item*12-12, max_limit=item*12" 
+                        >
+                        <a href="#" >{{ item }}</a>
+                </button>
+                <button v-bind:disabled="min_limit===1+buttonNum*12-12" v-bind:class="{'limit-for-arrow': min_limit===1+buttonNum*12-12}" v-on:click="min_limit += 12, max_limit +=12"><a href="#">></a></button>
+                <button v-bind:disabled="min_limit===1+buttonNum*12-12" v-bind:class="{'limit-for-arrow': min_limit===1+buttonNum*12-12}" v-on:click="min_limit = 1+buttonNum*12-12, max_limit =buttonNum*12"><a href="#">>></a></button>
             </div>
         </div>
     </div>
@@ -33,10 +36,33 @@ import Jsoninfo from '../../json-info.json'
                 rooms: Jsoninfo.rooms,
                 min_limit:1,
                 max_limit: 12,
+                length: null
 
             }
         },
         components:{RoomOne},
+        methods:{
+             min_but(cur){
+                if((cur-1)/12 >this.buttonNum -3){
+                    return this.buttonNum-4
+                }
+                return (cur-1)/12-1
+            },
+            max_but(cur){
+                if((cur-1)/12 <3){
+                    return 5
+                }
+                return (cur-1)/12+3
+            }
+        },
+        computed:{
+            buttonNum(){
+                this.length = Object.keys(Jsoninfo.rooms)
+                return Math.ceil(this.length.length/12)
+            },
+           
+            
+        }
         
     }
 </script>
@@ -103,6 +129,9 @@ import Jsoninfo from '../../json-info.json'
     .rooms-header{
     padding: 1em 25px 0em 10%;
     }
+}
+.rooms .rooms-nav .inviz{
+    display: none;
 }
 
 </style>
