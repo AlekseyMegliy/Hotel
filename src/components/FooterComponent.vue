@@ -34,8 +34,9 @@
             </div>
             <div class="col-md-4 footer-info">
                 <h2>Subscription</h2>
-                <input id="email" type="email" name="email" placeholder="Enter email id here" class="col-8 col-md-5 col-lg-6">
-                <input type="submit" value="Get Notify"  class="col-4 col-md-4 col-lg-3">
+                <input id="email" type="email" v-model="state.email" name="email" placeholder="Enter email id here" class="col-8 col-md-5 col-lg-6">
+                <input type="submit" value="Get Notify"  class="col-4 col-md-4 col-lg-3" @click="submit">
+                <div v-if="v$.email.$error" v-for="error in v$.email.$errors" :key="error.$eid" class="col-12" style="color:red">{{ error.$message }}</div>
                 <div class="social col-10">
                     <a href="#"><img width="27px" src="@/assets/social/fb.png"></a>
                     <a href="#"><img width="30px" src="@/assets/social/in.png"></a>
@@ -49,6 +50,39 @@
     </div>
 </template>
 <script>
+    import { reactive, computed } from 'vue'
+    import { useVuelidate } from '@vuelidate/core'
+    import { required, email } from '@vuelidate/validators'
+    export default{
+        setup () {
+            const state = reactive({
+                email:''
+            })
+            const rules = computed(() =>  {
+                return {
+                    email:{ required, email}
+                }
+            })
+            const v$ = useVuelidate(rules, state)
+            return{
+                state, 
+                v$
+            }
+        },
+       
+        methods: {
+            submit(){
+                console.log(this.v$)
+                this.v$.$validate()
+                if(!this.v$.$error){
+                   alert("Submit success") 
+                } else{
+                    alert("Submit not success") 
+                }
+                
+            }
+        },
+    }
 
 </script>
 
