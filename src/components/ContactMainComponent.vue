@@ -6,11 +6,20 @@
         </div>
         <div class="offset-md-3 сol-12 col-md-6 row contact-form">
             <h2 class="offset-md-1">Write to us</h2>
-                <form class="сol-12 offset-md-1 row">
-                    <input class="сol-12 col-md-10" placeholder="Name" id="name" type="text" name="name">
-                    <input class="сol-12 col-md-10" placeholder="Email" id="email" type="email" name="email">
-                    <input class="сol-12 col-md-10" placeholder="Phone" id="phone" type="number" name="phone" >
-                    <textarea class="сol-12 col-md-10" rows="3" placeholder="Message"></textarea>
+                <form class="сol-12 offset-md-1 row"   @submit.prevent="submit">
+                    
+                    <input class="сol-12 col-md-10" placeholder="Name *" id="name" type="text" name="name" v-model="state.name" required>
+                    <div v-if="v$.name.$error" v-for="error in v$.name.$errors" :key="error.$nid" class="col-12 error-mes" style="color:red">{{ error.$message }}</div>
+                    
+                    <input class="сol-12 col-md-10" placeholder="Email *" id="email" type="email" name="email" v-model="state.email" required>
+                    <div v-if="v$.email.$error" v-for="error in v$.email.$errors" :key="error.$eid" class="col-12 error-mes" style="color:red">{{ error.$message }}</div>
+                    
+                    <input class="сol-12 col-md-10" placeholder="Phone" id="phone" type="number" name="phone"  v-model="state.phone">
+                    <div v-if="v$.phone.$error" v-for="error in v$.phone.$errors" :key="error.$pid" class="col-12 error-mes" style="color:red">{{ error.$message }}</div>
+                    
+                    <textarea class="сol-12 col-md-10" rows="3" placeholder="Message *"  v-model="state.message" required></textarea>
+                    <div v-if="v$.message.$error" v-for="error in v$.message.$errors" :key="error.$mesid" class="col-12 error-mes-area" style="color:red">{{ error.$message }}</div>
+                    
                     <input type="submit" value="Send" class="col-3 ">
                 </form>
         </div>
@@ -18,7 +27,45 @@
 </template>
 
 <script>
-
+    import { reactive, computed } from 'vue'
+    import { useVuelidate } from '@vuelidate/core'
+    import { required, email, minLength } from '@vuelidate/validators'
+    export default{
+        setup () {
+            const state = reactive({
+                name: '',
+                email:'',
+                phone:'',
+                message: '',
+            })
+            const rules = computed(() =>  {
+                return {
+                    name: {required, minLength: minLength(2)},
+                    email:{ required, email},
+                    phone: { minLength: minLength(9)},
+                    message:{required, minLength: minLength(10)}
+                }
+            })
+            const v$ = useVuelidate(rules, state)
+            return{
+                state, 
+                v$
+            }
+        },
+       
+        methods: {
+            submit(){
+                console.log(this.v$)
+                this.v$.$validate()
+                if(!this.v$.$error){
+                   alert("Submit success " + 'Name: ' + this.state.name + ' Email: ' + this.state.email + ' Phone: ' + this.state.phone + ' Message: ' + this.state.message) 
+                } else{
+                    alert("Submit not success") 
+                }
+                
+            }
+        },
+    }
 </script>
 
 <style>
@@ -70,5 +117,12 @@
         .contact-form form{
             margin: 0 auto;
         }
+    }
+    .error-mes{
+    font-size: small;
+    margin: -10px 0 10px 0;
+    }
+    .error-mes-area{
+    font-size: small;
     }
 </style>
