@@ -101,7 +101,7 @@
                 return {
                     name: {required, minLength: minLength(2)},
                     email:{ required, email},
-                    phone: { minLength: minLength(10)},
+                    phone: { minLength: minLength(9)},
                     rooms:{required, minValue:minValue(1)},
                     adults:{required, minValue:minValue(1)},
                     date:{

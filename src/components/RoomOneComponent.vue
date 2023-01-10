@@ -1,9 +1,11 @@
 <template>
-    <div v-if="data.id >= min_limit && data.id <= max_limit" class="col-md-5 col-11 room-one">
+    <div v-if="data.filtered_id >= min_limit && data.filtered_id <= max_limit " class="col-md-5 col-11 room-one">
         <img :src="require(`@/assets/images/photos/${data.imgSrc[0]}.jpg`)">
         <div class="about-room">
-            <h2>{{ data.id }} {{ data.header }}</h2>
+            <h2>{{ data.id }} {{ data.header }} {{ data.filtered_id }}</h2>
             <p>{{ data.shortDesc }}</p>
+            <p>Size: {{ data.size }} sq</p>
+            <p>Price: ${{ data.price }}</p>
             <RouterLink :to="{ path: '/room', query: { room: data.id }}" class="detaisl-link">Check Details</RouterLink>
         </div>
     </div>
@@ -11,7 +13,7 @@
 
 <script>
     export default{
-        props:['data', 'min_limit', 'max_limit']
+        props:['data', 'min_limit', 'max_limit', ]
     }
 </script>
 
