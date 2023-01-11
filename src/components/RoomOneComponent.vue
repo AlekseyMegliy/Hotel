@@ -2,7 +2,7 @@
     <div v-if="data.filtered_id >= min_limit && data.filtered_id <= max_limit " class="col-md-5 col-11 room-one">
         <img :src="require(`@/assets/images/photos/${data.imgSrc[0]}.jpg`)">
         <div class="about-room">
-            <h2>{{ data.id }} {{ data.header }} {{ data.filtered_id }}</h2>
+            <h2>{{ data.id }} {{ data.header }}</h2>
             <p>{{ data.shortDesc }}</p>
             <p>Size: {{ data.size }} sq</p>
             <p>Price: ${{ data.price }}</p>

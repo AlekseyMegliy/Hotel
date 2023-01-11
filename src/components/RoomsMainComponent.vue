@@ -1,5 +1,5 @@
 <template>
-    <h2 class="offset-md-1 rooms-header">Rooms & Tariff {{ filtered_lenght }}</h2>
+    <h2 class="offset-md-1 rooms-header">Rooms & Tariff</h2>
     <h2 class="offset-md-1 rooms-header filter-header" v-on:click="filters=!filters">Filters</h2>
     <span v-on:click="filters=!filters" class="filter-drop"><img width="35"  :class="{'filter-arrow-up':filters}" height="35" src="@/assets/social/arrow.png"></span> 
     
@@ -16,12 +16,20 @@
                     </label>
                 </div>
                 <div class="price offset-md-1 col-9 col-sm-5 col-md-4">
-                    <label for="min-price" class="min-sq col-12">Min price: <input type="text" class="col-2" v-model="min_price">
+                    <label for="min-price" class="min-sq col-12">Min price: $<input type="text" class="col-2" v-model="min_price">
                         <input type="range" min="100" max="800"  class="col-12" id="min-price" v-model="min_price"> 
                     </label>
-                    <label for="max-price" class="max-sq  col-12">Max price: <input type="text" class="col-2" v-model="max_price">
+                    <label for="max-price" class="max-sq  col-12">Max price: $<input type="text" class="col-2" v-model="max_price">
                         <input type="range" min="300" max="1000"  class="col-12" id="max-price" v-model="max_price">
                     </label>
+                </div>
+                <div class="less-more less-more-sq offset-md-1 col-9 col-sm-5 col-md-5">
+                  <button v-on:click="smallest">From the smallest area</button>
+                  <button v-on:click="largest">From the largest area</button>
+                </div>
+                <div class="less-more less-more-price  col-9 col-sm-5 col-md-5">
+                  <button v-on:click="cheapest">From the cheapest</button>
+                  <button v-on:click="expensive">From the most expensive</button>
                 </div>
             </div>
         </Transition>
@@ -84,7 +92,77 @@ import Jsoninfo from '../../json-info.json'
                     return 5
                 }
                 return (cur-1)/12+3
-            }
+            },
+            smallest(){
+                for(let i = 0; i<this.length.length; i++){
+                    for(let j = 1; j<this.length.length-i; j++){
+                        
+                        if (this.rooms[j].size > this.rooms[j + 1].size) {
+                        let swap = this.rooms[j];
+                        this.rooms[j] = this.rooms[j + 1];
+                        this.rooms[j + 1] = swap;
+                        }
+                        
+                    }
+                }
+                this.min_sq=this.rooms[1].size
+                this.max_sq=150
+                this.min_price=100
+                this.max_price=1000
+                
+            },
+            largest(){
+                for(let i = 0; i<this.length.length; i++){
+                    for(let j = 1; j<this.length.length-i; j++){
+                        
+                        if (this.rooms[j].size < this.rooms[j + 1].size) {
+                        let swap = this.rooms[j];
+                        this.rooms[j] = this.rooms[j + 1];
+                        this.rooms[j + 1] = swap;
+                        }
+                        
+                    }
+                }
+                this.max_sq=this.rooms[1].size
+                this.min_sq=20
+                this.min_price=100
+                this.max_price=1000
+            },
+            cheapest(){
+                for(let i = 0; i<this.length.length; i++){
+                    for(let j = 1; j<this.length.length-i; j++){
+                        
+                        if (this.rooms[j].price > this.rooms[j + 1].price) {
+                        let swap = this.rooms[j];
+                        this.rooms[j] = this.rooms[j + 1];
+                        this.rooms[j + 1] = swap;
+                        }
+                        
+                    }
+                }
+                this.min_price=this.rooms[1].price
+                this.min_sq=20
+                this.max_sq=150
+                this.max_price=1000
+            },
+            expensive(){
+                for(let i = 0; i<this.length.length; i++){
+                    for(let j = 1; j<this.length.length-i; j++){
+                        
+                        if (this.rooms[j].price < this.rooms[j + 1].price) {
+                        let swap = this.rooms[j];
+                        this.rooms[j] = this.rooms[j + 1];
+                        this.rooms[j + 1] = swap;
+                        }
+                        
+                    }
+                }
+                this.max_price=this.rooms[1].price
+                this.min_sq=20
+                this.max_sq=150
+                this.min_price=100
+
+            },
         },
         mounted(){
             this.length = Object.keys(Jsoninfo.rooms)
@@ -95,7 +173,7 @@ import Jsoninfo from '../../json-info.json'
             min_sq: function(min){
                 let filter_id =null;
                 for(let i=1; i<=this.length.length; i++){
-                    if(Jsoninfo.rooms[i].size > min && Jsoninfo.rooms[i].size < this.max_sq){
+                    if(Jsoninfo.rooms[i].size >= min && Jsoninfo.rooms[i].size <= this.max_sq && Jsoninfo.rooms[i].price <= this.max_price && Jsoninfo.rooms[i].price >= this.min_price){
                         filter_id++
                         this.rooms[i].filtered_id= filter_id
                     } else{
@@ -109,7 +187,7 @@ import Jsoninfo from '../../json-info.json'
             max_sq: function(max){
                 let filter_id =null;
                 for(let i=1; i<=this.length.length; i++){
-                    if(Jsoninfo.rooms[i].size < max && Jsoninfo.rooms[i].size > this.min_sq){
+                    if(Jsoninfo.rooms[i].size <= max && Jsoninfo.rooms[i].size >= this.min_sq && Jsoninfo.rooms[i].price <= this.max_price && Jsoninfo.rooms[i].price >= this.min_price){
                         filter_id++
                         this.rooms[i].filtered_id= filter_id
                     } else{
@@ -123,7 +201,7 @@ import Jsoninfo from '../../json-info.json'
             min_price: function(min){
                 let filter_id =null;
                 for(let i=1; i<=this.length.length; i++){
-                    if(Jsoninfo.rooms[i].price > min && Jsoninfo.rooms[i].price < this.max_price){
+                    if(Jsoninfo.rooms[i].price >= min && Jsoninfo.rooms[i].price <= this.max_price && Jsoninfo.rooms[i].size <= this.max_sq && Jsoninfo.rooms[i].size >= this.min_sq){
                         filter_id++
                         this.rooms[i].filtered_id= filter_id
                     } else{
@@ -137,7 +215,7 @@ import Jsoninfo from '../../json-info.json'
             max_price: function(max){
                 let filter_id =null;
                 for(let i=1; i<=this.length.length; i++){
-                    if(Jsoninfo.rooms[i].price < max && Jsoninfo.rooms[i].price > this.min_price){
+                    if(Jsoninfo.rooms[i].price <= max && Jsoninfo.rooms[i].price >= this.min_price && Jsoninfo.rooms[i].size <= this.max_sq && Jsoninfo.rooms[i].size >= this.min_sq){
                         filter_id++
                         this.rooms[i].filtered_id= filter_id
                     } else{
@@ -206,6 +284,30 @@ import Jsoninfo from '../../json-info.json'
     margin-top: 10px;
     margin-bottom: 10px;
 }
+.rooms .filters .less-more{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+.rooms .filters .less-more-sq{
+    padding-right: 25px;
+}
+.rooms .filters .less-more-price{
+    padding-left: 25px;
+}
+.rooms .filters .less-more button{
+    color: #fff;
+    border-radius: 0;
+    border: none;
+    padding: 5px 30px;
+    background-color: #bfa145;
+    text-decoration: none;
+    transition: all ease-in-out 0.3s;
+}
+.rooms .filters .less-more button:hover{
+    background-color: #756534;
+}
+
 .rooms .rooms-nav{
     text-align: center;
     margin: 20px 0;
@@ -269,7 +371,7 @@ import Jsoninfo from '../../json-info.json'
     position: relative;
     top:0;
     overflow: hidden;
-    height:148px;
+    height:197px;
     transition: all ease-in-out 0.7s;
 }
 .filter-enter-from, .filter-leave-to  {
