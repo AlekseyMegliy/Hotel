@@ -38,35 +38,8 @@
                         </select> 
                         <div v-if="v$.adults.$error" v-for="error in v$.adults.$errors" :key="error.$aid" class="col-12 error-mes" style="color:red">{{ error.$message }}</div>
                         
-                        <select class="select-date"  v-model="state.date.number" required>
-                            <option value="">Number *</option>
-                            <option v-for="number in 31"
-                                :key="number"
-                                :value="number">
-                                {{ number }}
-                            </option>
-                        </select>
-                        <div v-if="v$.date.number.$error" v-for="error in v$.date.number.$errors" :key="error.$nid" class="col-12 error-mes" style="color:red">{{ error.$message }}</div>
-                        
-                        <select class="select-date" v-model="state.date.mounth" required>
-                            <option value="">Mounth *</option>
-                            <option v-for="mounth in mouths"
-                                :key="mounth.split('').slice(-2).slice(0)"
-                                :value="mounth.split('').slice(-2)[0] ">
-                                {{ mounth}}
-                            </option>
-                        </select>
-                        <div v-if="v$.date.mounth.$error" v-for="error in v$.date.mounth.$errors" :key="error.$mid" class="col-12 error-mes" style="color:red">{{ error.$message }}</div>
-
-                        <select class="select-date" v-model="state.date.year">
-                            <option v-for="year in years"
-                                :key="year"
-                                :value="year">
-                                {{ year }}
-                            </option>
-                        </select>
-                        <div v-if="v$.date.year.$error" v-for="error in v$.date.year.$errors" :key="error.$yid" class="col-12 error-mes" style="color:red">{{ error.$message }}</div>
-
+                        <Datepicker class="select-date col-12" v-model="date" :format='format' range></Datepicker>
+                        <div v-if="v$.datev.$error" v-for="error in v$.datev.$errors" :key="error.$nid" class="col-12 error-mes" style="color:red">{{ error.$message }}</div>
                     </div>
                     <textarea class="col-12" rows="3" placeholder="Message" v-model="state.message"></textarea>
                     <div v-if="v$.message.$error" v-for="error in v$.message.$errors" :key="error.$mesid" class="col-12 error-mes" style="color:red">{{ error.$message }}</div>
@@ -79,22 +52,25 @@
 </template>
 
 <script>
-    import { reactive, computed } from 'vue'
+    import { reactive, computed, ref, onMounted } from 'vue'
     import { useVuelidate } from '@vuelidate/core'
     import { required, email, minLength, minValue } from '@vuelidate/validators'
+    import Datepicker from '@vuepic/vue-datepicker';
+    import '@vuepic/vue-datepicker/dist/main.css'
+
+
+
+    
     export default{
         setup () {
+            const date = ref();
             const state = reactive({
                 name: '',
                 email:'',
                 phone:'',
                 rooms:'',
                 adults: '',
-                date:{
-                    number:'',
-                    mounth:'',
-                    year:'2023'
-                },
+                datev: date,
                 message: ''
             })
             const rules = computed(() =>  {
@@ -104,25 +80,39 @@
                     phone: { minLength: minLength(9)},
                     rooms:{required, minValue:minValue(1)},
                     adults:{required, minValue:minValue(1)},
-                    date:{
-                        number:{required, minValue:minValue(1)},
-                        mounth:{required, minLength:minValue(1)},
-                        year:{required, minValue:minValue(2023)}
-                    },
+                    datev:{required},
                     message:{minLength: minLength(10)}
                     
                 }
             })
+            onMounted(() => {
+            const startDate = new Date(new Date().setDate(new Date().getDate() + 1));
+            const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
+            date.value = [startDate, endDate];
+        })
+        const format = ([startDate, endDate]) => {
+            const startday = startDate.getDate();
+            const startmonth = startDate.getMonth() + 1;
+            const startyear = startDate.getFullYear();
+            const endday = endDate.getDate();
+            const endmonth = endDate.getMonth() + 1;
+            const endyear = endDate.getFullYear();
+        
+
+            return `${startday}/${startmonth}/${startyear} ~ ${endday}/${endmonth}/${endyear} `;
+        }
             const v$ = useVuelidate(rules, state)
             return{
                 state, 
-                v$
+                v$,
+                date,
+                format
             }
         },
+        components: { Datepicker },
         data() {
             return {
-                mouths:['Jan (1)', 'Feb (2)', 'Mar (3)', 'Apr (4)', 'May (5)', 'June (6)', 'July (7)', 'Aug (8)', 'Sep (9)', 'Oct (10)', 'Nov (11)', 'Dec (12)'],
-                years: ['2023', '2024', '2025', '2025', '2026']
+               
             }
         },
         methods: {
@@ -132,7 +122,7 @@
                 if(!this.v$.$error){
                    alert("Submit success:" + ' Name: ' + this.state.name + ' Email: ' + this.state.email + ' Phone: ' + 
                    this.state.phone + ' No. of Rooms: ' + this.state.rooms + ' No. of Adults: ' + this.state.adults + 
-                   ' Date: ' + this.state.date.number + '.' + this.state.date.mounth + '.' + this.state.date.year + ' Massege: ' + this.state.message) 
+                   ' Date: '+ this.date + ' Massege: ' + this.state.message) 
                 } else{
                     alert("Submit not success") 
                 }
@@ -217,8 +207,13 @@ input::-webkit-inner-spin-button {
 .home-form .form .selectors .select-number{
    width: 47%;
 }
+.home-form .form .selectors .select-date input{
+  margin-bottom: 0;
+  padding: 6px 12px 6px 35px;
+  border: 1px solid rgba(0, 0, 0, 0.479);
+}
 .home-form .form .selectors .select-date{
-   width: 30%;
+    margin-bottom: 15px;
 }
 .home-form .form textarea{
     font-family: 'Raleway', sans-serif;
