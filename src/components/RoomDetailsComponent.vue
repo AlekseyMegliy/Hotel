@@ -21,9 +21,10 @@
             </div>
             <div class="size-price col-md-6 col-lg-4 detail">
                 <div class=" row">
-                   <span class="col-11 col-md-5"><p class="col-12">Size</p><p class="col-12 size-price-num">{{ data.size }} sq</p></span>
-                   <span class="col-11 col-md-5"><p class="col-12">Price</p><p class="col-12 size-price-num">${{ data.price }}</p></span> 
+                   <span class="col-11 size-price-block col-md-5"><p class="col-12">Size</p><p class="col-12 size-price-num">{{ data.size }} sq</p></span>
+                   <span class="col-11 size-price-block col-md-5"><p class="col-12">Price</p><p class="col-12 size-price-num">${{ data.price }}</p></span> 
                 </div>
+                <star-rating class="rating" :increment="0.5" :rating="data.rating" v-model="rating"></star-rating>
                 
             </div>
         </div>
@@ -33,9 +34,15 @@
 <script>
     import Slider from '@/components/SliderComponent.vue'
     import Amenities from '@/components/AmenitiesComponent.vue';
+    import StarRating from 'vue-star-rating';
     export default{
         props:['room_num', 'data'], 
-        components:{ Slider, Amenities }
+        components:{ Slider, Amenities, StarRating },
+        data() {
+            return {
+                rating:3
+            }
+        },
     }
 </script>
 
@@ -74,13 +81,14 @@
     }
     .size-price{
         padding-right: 5.5%;
+        text-align: center;
     }
     .size-price .row{
         display: flex;
         justify-content: space-evenly;
         
     }
-    .size-price span{
+    .size-price .size-price-block{
         background-color: #C7C5BB;
         padding: 2em 0;
         text-align: center;
@@ -88,8 +96,14 @@
         height: 10.97em;
         line-height: 3em;  
     }
-    .size-price span .size-price-num{
+    .size-price .size-price-block .size-price-num{
         font-size: 2em;
+    }
+    .size-price .rating{
+        margin-left: auto;
+        margin-right: auto;
+        width: 265px;
+        padding-right:20px ;
     }
     @media all and (max-width:767px ){
         .details{
