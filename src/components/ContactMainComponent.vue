@@ -14,7 +14,7 @@
                     <input class="сol-12 col-md-10" placeholder="Email *" id="email" type="email" name="email" v-model="state.email" required>
                     <div v-if="v$.email.$error" v-for="error in v$.email.$errors" :key="error.$eid" class="col-12 error-mes" style="color:red">{{ error.$message }}</div>
                     
-                    <input class="сol-12 col-md-10" placeholder="Phone" id="phone" type="number" name="phone"  v-model="state.phone">
+                    <input class="сol-12 col-md-10" placeholder="Number: +123(45)6789012" id="phone" type="number" name="phone"  v-model="state.phone">
                     <div v-if="v$.phone.$error" v-for="error in v$.phone.$errors" :key="error.$pid" class="col-12 error-mes" style="color:red">{{ error.$message }}</div>
                     
                     <textarea class="сol-12 col-md-10" rows="3" placeholder="Message *"  v-model="state.message" required></textarea>
@@ -30,19 +30,20 @@
     import { reactive, computed } from 'vue'
     import { useVuelidate } from '@vuelidate/core'
     import { required, email, minLength } from '@vuelidate/validators'
+    import { useToast } from "vue-toastification"
     export default{
         setup () {
             const state = reactive({
                 name: '',
                 email:'',
-                phone:'',
+                phone:null,
                 message: '',
             })
             const rules = computed(() =>  {
                 return {
                     name: {required, minLength: minLength(2)},
                     email:{ required, email},
-                    phone: { minLength: minLength(9)},
+                    phone: { minLength: minLength(12)},
                     message:{required, minLength: minLength(10)}
                 }
             })
@@ -58,9 +59,10 @@
                 console.log(this.v$)
                 this.v$.$validate()
                 if(!this.v$.$error){
-                   alert("Submit success " + 'Name: ' + this.state.name + ' Email: ' + this.state.email + ' Phone: ' + this.state.phone + ' Message: ' + this.state.message) 
+                alert("Submit success " + 'Name: ' + this.state.name + ' Email: ' + this.state.email + ' Phone: ' + this.state.phone + ' Message: ' + this.state.message) 
+                    useToast().success("We will contact you shortly. Thanks!")
                 } else{
-                    alert("Submit not success") 
+                    useToast().error("Oops, something went wrong. Check the correctness of the entered data")
                 }
                 
             }

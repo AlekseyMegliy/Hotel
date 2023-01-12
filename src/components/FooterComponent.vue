@@ -53,6 +53,7 @@
     import { reactive, computed } from 'vue'
     import { useVuelidate } from '@vuelidate/core'
     import { required, email } from '@vuelidate/validators'
+    import { useToast } from "vue-toastification"
     export default{
         setup () {
             const state = reactive({
@@ -75,9 +76,9 @@
                 console.log(this.v$)
                 this.v$.$validate()
                 if(!this.v$.$error){
-                   alert("Submit success") 
+                   useToast().success("We will contact you shortly. Thanks!")
                 } else{
-                    alert("Submit not success") 
+                    useToast().error("Oops, something went wrong. Check that the email is correct")
                 }
                 
             }

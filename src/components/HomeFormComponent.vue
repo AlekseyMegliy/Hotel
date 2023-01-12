@@ -13,7 +13,7 @@
                     <input class="col-12" placeholder="Email *" id="email" type="email" name="email" v-model="state.email" required>
                     <div v-if="v$.email.$error" v-for="error in v$.email.$errors" :key="error.$eid" class="col-12 error-mes" style="color:red">{{ error.$message }}</div>
                     
-                    <input class="col-12" placeholder="Phone" id="phone" type="number" name="phone"  v-model="state.phone">
+                    <input class="col-12" placeholder="Number: +123(45)6789012" id="phone" type="number" name="phone"  v-model="state.phone">
                     <div v-if="v$.phone.$error" v-for="error in v$.phone.$errors" :key="error.$pid" class="col-12 error-mes" style="color:red">{{ error.$message }}</div>
                     
                     <div class="col-12 selectors">
@@ -57,17 +57,18 @@
     import { required, email, minLength, minValue } from '@vuelidate/validators'
     import Datepicker from '@vuepic/vue-datepicker';
     import '@vuepic/vue-datepicker/dist/main.css'
-
+    import { useToast } from "vue-toastification"
 
 
     
     export default{
         setup () {
+            const toast = useToast();
             const date = ref();
             const state = reactive({
                 name: '',
                 email:'',
-                phone:'',
+                phone:null,
                 rooms:'',
                 adults: '',
                 datev: date,
@@ -77,7 +78,7 @@
                 return {
                     name: {required, minLength: minLength(2)},
                     email:{ required, email},
-                    phone: { minLength: minLength(9)},
+                    phone: { minLength: minLength(12)},
                     rooms:{required, minValue:minValue(1)},
                     adults:{required, minValue:minValue(1)},
                     datev:{required},
@@ -106,7 +107,8 @@
                 state, 
                 v$,
                 date,
-                format
+                format,
+                toast
             }
         },
         components: { Datepicker },
@@ -120,11 +122,12 @@
                 console.log(this.v$)
                 this.v$.$validate()
                 if(!this.v$.$error){
-                   alert("Submit success:" + ' Name: ' + this.state.name + ' Email: ' + this.state.email + ' Phone: ' + 
+                   `alert("DATA:" + ' Name: ' + this.state.name + ' Email: ' + this.state.email + ' Phone: ' + 
                    this.state.phone + ' No. of Rooms: ' + this.state.rooms + ' No. of Adults: ' + this.state.adults + 
-                   ' Date: '+ this.date + ' Massege: ' + this.state.message) 
+                   ' Date: '+ this.date + ' Massege: ' + this.state.message) `
+                   this.toast.success("Submit success!")
                 } else{
-                    alert("Submit not success") 
+                    this.toast.error("Submit not success")
                 }
                 
             }
