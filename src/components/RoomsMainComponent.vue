@@ -284,9 +284,40 @@ import Jsoninfo from '../../json-info.json'
     margin-top: 10px;
     margin-bottom: 10px;
 }
+.rooms .filters input[type=range]{
+    -webkit-appearance: none;
+    
+}
+
+.rooms .filters input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+.rooms .filters input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: goldenrod;
+    margin-top: -5px;
+}
+
+.rooms .filters input[type=range]:focus {
+    outline: none;
+}
+
+.rooms .filters input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
 .rooms .filters .less-more{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-bottom: 15px;
 }
 .rooms .filters .less-more-sq{
