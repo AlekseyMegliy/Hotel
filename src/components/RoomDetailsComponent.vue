@@ -24,7 +24,7 @@
                    <span class="col-11 size-price-block col-md-5"><p class="col-12">Size</p><p class="col-12 size-price-num">{{ data.size }} sq</p></span>
                    <span class="col-11 size-price-block col-md-5"><p class="col-12">Price</p><p class="col-12 size-price-num">${{ data.price }}</p></span> 
                 </div>
-                <star-rating class="rating" :increment="0.5" :rating="data.rating" v-model="rating"></star-rating>
+                <star-rating class="rating" :increment="0.5" v-model:rating="rating" :read-only="read_only"  v-on:click="test()"></star-rating>
                 
             </div>
         </div>
@@ -35,14 +35,25 @@
     import Slider from '@/components/SliderComponent.vue'
     import Amenities from '@/components/AmenitiesComponent.vue';
     import StarRating from 'vue-star-rating';
+    import { useToast } from "vue-toastification"
     export default{
         props:['room_num', 'data'], 
         components:{ Slider, Amenities, StarRating },
         data() {
             return {
-                rating:3
+                rating:this.data.rating,
+                read_only: false
+                
             }
         },
+      
+        watch:{
+            rating:function(){
+                useToast().success("Thank you for your feedback!")
+                this.read_only = true
+            }
+        }
+      
     }
 </script>
 
